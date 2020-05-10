@@ -1,3 +1,7 @@
+" adapted from
+" https://github.com/morhetz/gruvbox/autoload/lightline/colorscheme/gruvbox.vim
+" by dedowsdi@outlook.com
+
 let  s:black   = [ '#000000', g:vc8_pallete.black ]
 let  s:red     = [ '#000000', g:vc8_pallete.red ]
 let  s:green   = [ '#000000', g:vc8_pallete.green ]

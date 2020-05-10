@@ -13,11 +13,12 @@
 " 
 " linux virtual console render blink bg color as bright bg color, vim don't
 " support it. But it doesn't matter, since bright background is rarely needed.
+" It also means you must place all your background colors at the 1st 8 palette slots.
 "
 " reverse won't work right if fg color >= 8.
 "
 " Search, IncSearch style highlight won't work right in linux console, the
-" current fg color take effect for the new fg color, no ider why would that
+" current fg color take effect for the new fg color, no idea why would that
 " happen. A grey background can reduce that impact, so Search, IncSearch, Visual
 " Diff* all use gray background.
 "
@@ -49,6 +50,7 @@ endif
 
 function s:hi(group, fg, ...) abort
   "                      bg, attributes
+
   if a:0 > 0 && a:1 >= 8
     echom a:group 'use bg ' a:1
   endif
@@ -137,13 +139,13 @@ call s:hi('vc8_orange', s:orange)
 call s:hi('vc8_bcyan',  s:bcyan)
 call s:hi('vc8_bwhite', s:bwhite)
 
-call s:hi('vc8_red_sign', s:bred, s:gray)
-call s:hi('vc8_green_sign', s:bgreen, s:gray)
-call s:hi('vc8_yellow_sign', s:byellow, s:gray)
-call s:hi('vc8_blue_sign', s:bblue, s:gray)
-call s:hi('vc8_purple_sign', s:bblack, s:gray)
-call s:hi('vc8_aqua_sign', s:bcyan, s:gray)
-call s:hi('vc8_orange_sign', s:red, s:gray)
+call s:hi('vc8_bred_sign', s:bred, s:gray)
+call s:hi('vc8_bgreen_sign', s:bgreen, s:gray)
+call s:hi('vc8_byellow_sign', s:byellow, s:gray)
+call s:hi('vc8_bblue_sign', s:bblue, s:gray)
+call s:hi('vc8_bpurple_sign', s:bblack, s:gray)
+call s:hi('vc8_bcyan_sign', s:bcyan, s:gray)
+call s:hi('vc8_orange_sign', s:orange, s:gray)
 
 hi! link SpecialKey vc8_bg1
 
@@ -181,7 +183,7 @@ hi! link VisualNOS Visual
 
 hi! link WarningMsg vc8_bred
 
-call s:hi('WildMenu', s:yellow, s:gray, 'bold' )
+call s:hi('WildMenu', s:orange, s:gray )
 
 call s:hi('Folded', s:white, s:gray)
 call s:hi('FoldColumn', s:orange, s:gray)
@@ -240,7 +242,7 @@ hi! link Identifier vc8_bblue
 
 hi! link Statement vc8_bred
 
-hi! link PreProc vc8_baqua
+hi! link PreProc vc8_bcyan
 
 hi! link Type vc8_byellow
 
@@ -276,17 +278,17 @@ hi! link Keyword vc8_bred
 
 hi! link Exception vc8_bred
 
-hi! link Include vc8_baqua
+hi! link Include vc8_bcyan
 
-hi! link Define vc8_baqua
+hi! link Define vc8_bcyan
 
-hi! link Macro vc8_baqua
+hi! link Macro vc8_bcyan
 
-hi! link PreCondit vc8_baqua
+hi! link PreCondit vc8_bcyan
 
 hi! link StorageClass vc8_orange
 
-hi! link Structure vc8_baqua
+hi! link Structure vc8_bcyan
 
 hi! link Typedef vc8_byellow
 
@@ -313,31 +315,31 @@ hi! link SneakLabel Search
 call s:hi('IndentGuidesOdd', s:black, s:gray)
 call s:hi('IndentGuidesEven', s:black, s:green)
 
-hi! link GitGutterAdd vc8_green_sign
-hi! link GitGutterChange vc8_aqua_sign
-hi! link GitGutterDelete vc8_red_sign
-hi! link GitGutterChangeDelete vc8_aqua_sign
+hi! link GitGutterAdd vc8_bgreen_sign
+hi! link GitGutterChange vc8_bcyan_sign
+hi! link GitGutterDelete vc8_bred_sign
+hi! link GitGutterChangeDelete vc8_bcyan_sign
 
 hi! link gitcommitSelectedFile vc8_bgreen
 hi! link gitcommitDiscardedFile vc8_bred
 
-hi! link SignifySignAdd vc8_green_sign
-hi! link SignifySignChange vc8_aqua_sign
-hi! link SignifySignDelete vc8_red_sign
+hi! link SignifySignAdd vc8_bgreen_sign
+hi! link SignifySignChange vc8_bcyan_sign
+hi! link SignifySignDelete vc8_bred_sign
 
 call s:hi('SyntasticError', 'fg', 'bg', 'undercurl')
 call s:hi('SyntasticWarning', 'fg', 'bg', 'undercurl')
 
-hi! link SyntasticErrorSign vc8_red_sign
-hi! link SyntasticWarningSign vc8_yellow_sign
+hi! link SyntasticErrorSign vc8_bred_sign
+hi! link SyntasticWarningSign vc8_byellow_sign
 
-hi! link SignatureMarkText vc8_blue_sign
-hi! link SignatureMarkerText vc8_purple_sign
+hi! link SignatureMarkText vc8_bblue_sign
+hi! link SignatureMarkerText vc8_bpurple_sign
 
-hi! link ShowMarksHLl vc8_blue_sign
-hi! link ShowMarksHLu vc8_blue_sign
-hi! link ShowMarksHLo vc8_blue_sign
-hi! link ShowMarksHLm vc8_blue_sign
+hi! link ShowMarksHLl vc8_bblue_sign
+hi! link ShowMarksHLu vc8_bblue_sign
+hi! link ShowMarksHLo vc8_bblue_sign
+hi! link ShowMarksHLm vc8_bblue_sign
 
 hi! link CtrlPMatch vc8_byellow
 hi! link CtrlPNoEntries vc8_bred
@@ -368,26 +370,26 @@ call s:hi('ALEError', 'fg', 'bg', 'underline')
 call s:hi('ALEWarning', 'fg', 'bg', 'underline')
 call s:hi('ALEInfo',  'fg', 'bg', 'underline')
 
-hi! link ALEErrorSign vc8_red_sign
-hi! link ALEWarningSign vc8_yellow_sign
-hi! link ALEInfoSign vc8_blue_sign
+hi! link ALEErrorSign vc8_bred_sign
+hi! link ALEWarningSign vc8_byellow_sign
+hi! link ALEInfoSign vc8_bblue_sign
 
-hi! link DirvishPathTail vc8_baqua
+hi! link DirvishPathTail vc8_bcyan
 hi! link DirvishArg vc8_byellow
 
-hi! link netrwDir vc8_baqua
-hi! link netrwClassify vc8_baqua
+hi! link netrwDir vc8_bcyan
+hi! link netrwClassify vc8_bcyan
 hi! link netrwLink vc8_fg1
 hi! link netrwSymLink vc8_fg0
 hi! link netrwExe vc8_byellow
 hi! link netrwComment vc8_fg1
 hi! link netrwList vc8_bblue
-hi! link netrwHelpCmd vc8_baqua
+hi! link netrwHelpCmd vc8_bcyan
 hi! link netrwCmdSep vc8_fg1
 hi! link netrwVersion vc8_bgreen
 
-hi! link NERDTreeDir vc8_baqua
-hi! link NERDTreeDirSlash vc8_baqua
+hi! link NERDTreeDir vc8_bcyan
+hi! link NERDTreeDirSlash vc8_bcyan
 hi! link NERDTreeOpenable vc8_orange
 hi! link NERDTreeClosable vc8_orange
 hi! link NERDTreeFile vc8_fg0
@@ -401,10 +403,10 @@ hi! link NERDTreeToggleOff vc8_bred
 call s:hi('multiple_cursors_cursor', 'fg', 'bg', 'reverse')
 call s:hi('multiple_cursors_visual', 'fg', s:gray)
 
-hi! link CocErrorSign vc8_red_sign
+hi! link CocErrorSign vc8_bred_sign
 hi! link CocWarningSign vc8_orange_sign
-hi! link CocInfoSign vc8_yellow_sign
-hi! link CocHintSign vc8_blue_sign
+hi! link CocInfoSign vc8_byellow_sign
+hi! link CocHintSign vc8_bblue_sign
 hi! link CocErrorFloat vc8_bred
 hi! link CocWarningFloat vc8_orange
 hi! link CocInfoFloat vc8_byellow
@@ -423,18 +425,18 @@ call s:hi('CocHintHighlight', 'fg', 'bg', 'undercurl')
 
 hi! link diffAdded vc8_bgreen
 hi! link diffRemoved vc8_bred
-hi! link diffChanged vc8_baqua
+hi! link diffChanged vc8_bcyan
 hi! link diffFile vc8_orange
 hi! link diffNewFile vc8_byellow
 hi! link diffLine vc8_bblue
 
 hi! link htmlTag vc8_bblue
 hi! link htmlEndTag vc8_bblue
-hi! link htmlTagName vc8_baqua
-hi! link htmlArg vc8_baqua
+hi! link htmlTagName vc8_bcyan
+hi! link htmlArg vc8_bcyan
 hi! link htmlScriptTag vc8_bpurple
 hi! link htmlTagN vc8_fg0
-hi! link htmlSpecialTagName vc8_baqua
+hi! link htmlSpecialTagName vc8_bcyan
 call s:hi('htmlLink', s:white, 'bg', 'underline' )
 hi! link htmlSpecialChar vc8_orange
 call s:hi('htmlBold', s:bwhite, s:black, 'bold' )
@@ -450,7 +452,7 @@ hi! link xmlEndTag vc8_bblue
 hi! link xmlTagName vc8_bblue
 hi! link xmlEqual vc8_bblue
 
-hi! link docbkKeyword vc8_baqua
+hi! link docbkKeyword vc8_bcyan
 
 hi! link xmlDocTypeDecl vc8_fg1
 hi! link xmlDocTypeKeyword vc8_bpurple
@@ -460,7 +462,7 @@ hi! link xmlCdataCdata vc8_bpurple
 hi! link dtdFunction vc8_fg1
 hi! link dtdTagName vc8_bpurple
 
-hi! link xmlAttrib vc8_baqua
+hi! link xmlAttrib vc8_bcyan
 hi! link xmlProcessingDelim vc8_fg1
 
 hi! link dtdParamEntityPunct vc8_fg1
@@ -486,11 +488,11 @@ hi! link clojureSpecial vc8_orange
 hi! link clojureDefine vc8_orange
 hi! link clojureFunc vc8_byellow
 hi! link clojureRepeat vc8_byellow
-hi! link clojureCharacter vc8_baqua
-hi! link clojureStringEscape vc8_baqua
+hi! link clojureCharacter vc8_bcyan
+hi! link clojureStringEscape vc8_bcyan
 hi! link clojureException vc8_bred
-hi! link clojureRegexp vc8_baqua
-hi! link clojureRegexpEscape vc8_baqua
+hi! link clojureRegexp vc8_bcyan
+hi! link clojureRegexpEscape vc8_bcyan
 
 call s:hi('clojureRegexpCharClass', s:white, 'bg', 'bold' )
 
@@ -511,7 +513,7 @@ hi! link cStructure vc8_orange
 hi! link pythonBuiltin vc8_orange
 hi! link pythonBuiltinObj vc8_orange
 hi! link pythonBuiltinFunc vc8_orange
-hi! link pythonFunction vc8_baqua
+hi! link pythonFunction vc8_bcyan
 hi! link pythonDecorator vc8_bred
 hi! link pythonInclude vc8_bblue
 hi! link pythonImport vc8_bblue
@@ -535,40 +537,40 @@ hi! link cssSelectorOp vc8_bblue
 hi! link cssSelectorOp2 vc8_bblue
 hi! link cssImportant vc8_bgreen
 hi! link cssVendor vc8_fg0
-hi! link cssTextProp vc8_baqua
-hi! link cssAnimationProp vc8_baqua
+hi! link cssTextProp vc8_bcyan
+hi! link cssAnimationProp vc8_bcyan
 hi! link cssUIProp vc8_byellow
-hi! link cssTransformProp vc8_baqua
-hi! link cssTransitionProp vc8_baqua
-hi! link cssPrintProp vc8_baqua
+hi! link cssTransformProp vc8_bcyan
+hi! link cssTransitionProp vc8_bcyan
+hi! link cssPrintProp vc8_bcyan
 hi! link cssPositioningProp vc8_byellow
-hi! link cssBoxProp vc8_baqua
-hi! link cssFontDescriptorProp vc8_baqua
-hi! link cssFlexibleBoxProp vc8_baqua
-hi! link cssBorderOutlineProp vc8_baqua
-hi! link cssBackgroundProp vc8_baqua
-hi! link cssMarginProp vc8_baqua
-hi! link cssListProp vc8_baqua
-hi! link cssTableProp vc8_baqua
-hi! link cssFontProp vc8_baqua
-hi! link cssPaddingProp vc8_baqua
-hi! link cssDimensionProp vc8_baqua
-hi! link cssRenderProp vc8_baqua
-hi! link cssColorProp vc8_baqua
-hi! link cssGeneratedContentProp vc8_baqua
+hi! link cssBoxProp vc8_bcyan
+hi! link cssFontDescriptorProp vc8_bcyan
+hi! link cssFlexibleBoxProp vc8_bcyan
+hi! link cssBorderOutlineProp vc8_bcyan
+hi! link cssBackgroundProp vc8_bcyan
+hi! link cssMarginProp vc8_bcyan
+hi! link cssListProp vc8_bcyan
+hi! link cssTableProp vc8_bcyan
+hi! link cssFontProp vc8_bcyan
+hi! link cssPaddingProp vc8_bcyan
+hi! link cssDimensionProp vc8_bcyan
+hi! link cssRenderProp vc8_bcyan
+hi! link cssColorProp vc8_bcyan
+hi! link cssGeneratedContentProp vc8_bcyan
 
 hi! link javaScriptBraces vc8_fg0
-hi! link javaScriptFunction vc8_baqua
+hi! link javaScriptFunction vc8_bcyan
 hi! link javaScriptIdentifier vc8_orange
 hi! link javaScriptMember vc8_bblue
 hi! link javaScriptNumber vc8_bpurple
 hi! link javaScriptNull vc8_bpurple
 hi! link javaScriptParens vc8_fg1
-hi! link javascriptImport vc8_baqua
-hi! link javascriptExport vc8_baqua
-hi! link javascriptClassKeyword vc8_baqua
-hi! link javascriptClassExtends vc8_baqua
-hi! link javascriptDefault vc8_baqua
+hi! link javascriptImport vc8_bcyan
+hi! link javascriptExport vc8_bcyan
+hi! link javascriptClassKeyword vc8_bcyan
+hi! link javascriptClassExtends vc8_bcyan
+hi! link javascriptDefault vc8_bcyan
 hi! link javascriptClassName vc8_byellow
 hi! link javascriptClassSuperName vc8_byellow
 hi! link javascriptGlobal vc8_byellow
@@ -591,15 +593,15 @@ hi! link javascriptBOMWindowMethod vc8_fg0
 hi! link javascriptStringMethod vc8_fg0
 hi! link javascriptVariable vc8_orange
 hi! link javascriptClassSuper vc8_orange
-hi! link javascriptFuncKeyword vc8_baqua
-hi! link javascriptAsyncFunc vc8_baqua
+hi! link javascriptFuncKeyword vc8_bcyan
+hi! link javascriptAsyncFunc vc8_bcyan
 hi! link javascriptClassStatic vc8_orange
 hi! link javascriptOperator vc8_bred
 hi! link javascriptForOperator vc8_bred
 hi! link javascriptYield vc8_bred
 hi! link javascriptExceptions vc8_bred
 hi! link javascriptMessage vc8_bred
-hi! link javascriptTemplateSB vc8_baqua
+hi! link javascriptTemplateSB vc8_bcyan
 hi! link javascriptTemplateSubstitution vc8_fg0
 hi! link javascriptLabel vc8_fg0
 hi! link javascriptObjectLabel vc8_fg0
@@ -620,22 +622,22 @@ hi! link javascriptHeadersMethod vc8_fg0
 hi! link javascriptAsyncFuncKeyword vc8_bred
 hi! link javascriptAwaitFuncKeyword vc8_bred
 
-hi! link jsClassKeyword vc8_baqua
-hi! link jsExtendsKeyword vc8_baqua
-hi! link jsExportDefault vc8_baqua
-hi! link jsTemplateBraces vc8_baqua
+hi! link jsClassKeyword vc8_bcyan
+hi! link jsExtendsKeyword vc8_bcyan
+hi! link jsExportDefault vc8_bcyan
+hi! link jsTemplateBraces vc8_bcyan
 hi! link jsGlobalNodeObjects vc8_fg0
 hi! link jsGlobalObjects vc8_fg0
-hi! link jsFunction vc8_baqua
+hi! link jsFunction vc8_bcyan
 hi! link jsFuncParens vc8_fg1
 hi! link jsParens vc8_fg1
 hi! link jsNull vc8_bpurple
 hi! link jsUndefined vc8_bpurple
 hi! link jsClassDefinition vc8_byellow
 
-hi! link typeScriptReserved vc8_baqua
-hi! link typeScriptLabel vc8_baqua
-hi! link typeScriptFuncKeyword vc8_baqua
+hi! link typeScriptReserved vc8_bcyan
+hi! link typeScriptLabel vc8_bcyan
+hi! link typeScriptFuncKeyword vc8_bcyan
 hi! link typeScriptIdentifier vc8_orange
 hi! link typeScriptBraces vc8_fg0
 hi! link typeScriptEndColons vc8_fg0
@@ -650,17 +652,17 @@ hi! link typeScriptParens vc8_fg1
 hi! link typeScriptOpSymbols vc8_fg1
 hi! link typeScriptHtmlElemProperties vc8_fg0
 hi! link typeScriptNull vc8_bpurple
-hi! link typeScriptInterpolationDelimiter vc8_baqua
+hi! link typeScriptInterpolationDelimiter vc8_bcyan
 
-hi! link purescriptModuleKeyword vc8_baqua
+hi! link purescriptModuleKeyword vc8_bcyan
 hi! link purescriptModuleName vc8_fg0
-hi! link purescriptWhere vc8_baqua
+hi! link purescriptWhere vc8_bcyan
 hi! link purescriptDelimiter vc8_fg1
 hi! link purescriptType vc8_fg0
-hi! link purescriptImportKeyword vc8_baqua
-hi! link purescriptHidingKeyword vc8_baqua
-hi! link purescriptAsKeyword vc8_baqua
-hi! link purescriptStructure vc8_baqua
+hi! link purescriptImportKeyword vc8_bcyan
+hi! link purescriptHidingKeyword vc8_bcyan
+hi! link purescriptAsKeyword vc8_bcyan
+hi! link purescriptStructure vc8_bcyan
 hi! link purescriptOperator vc8_bblue
 hi! link purescriptTypeVar vc8_fg0
 hi! link purescriptConstructor vc8_fg0
@@ -675,12 +677,12 @@ hi! link coffeeParen vc8_fg1
 hi! link coffeeBracket vc8_orange
 
 hi! link rubyStringDelimiter vc8_bgreen
-hi! link rubyInterpolationDelimiter vc8_baqua
+hi! link rubyInterpolationDelimiter vc8_bcyan
 
 hi! link objcTypeModifier vc8_bred
 hi! link objcDirective vc8_bblue
 
-hi! link goDirective vc8_baqua
+hi! link goDirective vc8_bcyan
 
 hi! link goConstants vc8_bpurple
 
@@ -690,7 +692,7 @@ hi! link goDeclType vc8_bblue
 hi! link goBuiltins vc8_orange
 
 hi! link luaIn vc8_bred
-hi! link luaFunction vc8_baqua
+hi! link luaFunction vc8_bcyan
 hi! link luaTable vc8_orange
 
 hi! link moonSpecialOp vc8_fg1
@@ -699,7 +701,7 @@ hi! link moonFunction vc8_fg1
 hi! link moonObject vc8_byellow
 
 hi! link javaAnnotation vc8_bblue
-hi! link javaDocTags vc8_baqua
+hi! link javaDocTags vc8_bcyan
 hi! link javaCommentTitle vimCommentTitle
 hi! link javaParen vc8_fg1
 hi! link javaParen1 vc8_fg1
@@ -712,7 +714,7 @@ hi! link javaVarArg vc8_bgreen
 
 hi! link elixirDocString Comment
 hi! link elixirStringDelimiter vc8_bgreen
-hi! link elixirInterpolationDelimiter vc8_baqua
+hi! link elixirInterpolationDelimiter vc8_bcyan
 hi! link elixirModuleDeclaration vc8_byellow
 
 hi! link scalaNameDefinition vc8_fg0
@@ -721,12 +723,12 @@ hi! link scalaCapitalWord vc8_fg0
 hi! link scalaTypeExtension vc8_fg0
 hi! link scalaKeyword vc8_bred
 hi! link scalaKeywordModifier vc8_bred
-hi! link scalaSpecial vc8_baqua
+hi! link scalaSpecial vc8_bcyan
 hi! link scalaOperator vc8_fg0
 hi! link scalaTypeDeclaration vc8_byellow
 hi! link scalaTypeTypePostDeclaration vc8_byellow
 hi! link scalaInstanceDeclaration vc8_fg0
-hi! link scalaInterpolation vc8_baqua
+hi! link scalaInterpolation vc8_bcyan
 
 call s:hi('markdownItalic', s:white)
 
@@ -736,9 +738,9 @@ hi! link markdownH3 vc8_byellow
 hi! link markdownH4 vc8_byellow
 hi! link markdownH5 vc8_byellow
 hi! link markdownH6 vc8_byellow
-hi! link markdownCode vc8_baqua
-hi! link markdownCodeBlock vc8_baqua
-hi! link markdownCodeDelimiter vc8_baqua
+hi! link markdownCode vc8_bcyan
+hi! link markdownCodeBlock vc8_bcyan
+hi! link markdownCodeDelimiter vc8_bcyan
 hi! link markdownBlockquote vc8_fg1
 hi! link markdownListMarker vc8_fg1
 hi! link markdownOrderedListMarker vc8_fg1
@@ -763,15 +765,15 @@ hi! link haskellOperators vc8_bblue
 hi! link haskellBacktick vc8_orange
 hi! link haskellStatement vc8_orange
 hi! link haskellConditional vc8_orange
-hi! link haskellLet vc8_baqua
-hi! link haskellDefault vc8_baqua
-hi! link haskellWhere vc8_baqua
-hi! link haskellBottom vc8_baqua
-hi! link haskellBlockKeywords vc8_baqua
-hi! link haskellImportKeywords vc8_baqua
-hi! link haskellDeclKeyword vc8_baqua
-hi! link haskellDeriving vc8_baqua
-hi! link haskellAssocType vc8_baqua
+hi! link haskellLet vc8_bcyan
+hi! link haskellDefault vc8_bcyan
+hi! link haskellWhere vc8_bcyan
+hi! link haskellBottom vc8_bcyan
+hi! link haskellBlockKeywords vc8_bcyan
+hi! link haskellImportKeywords vc8_bcyan
+hi! link haskellDeclKeyword vc8_bcyan
+hi! link haskellDeriving vc8_bcyan
+hi! link haskellAssocType vc8_bcyan
 hi! link haskellNumber vc8_bpurple
 hi! link haskellPragma vc8_bpurple
 hi! link haskellString vc8_bgreen
