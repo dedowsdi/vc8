@@ -2,10 +2,7 @@
 " dedowsdi@outlook.com
 "
 "
-" This color scheme is mostly used for 8 color terminal.
-"
-" --------------------
-" For 8 color terminal:
+" This color scheme is used for 8 color terminal.
 "
 " linux virtual console render bold fg color as bright fg color:
 "
@@ -21,22 +18,6 @@
 " current fg color take effect for the new fg color, no idea why would that
 " happen. A grey background can reduce that impact, so Search, IncSearch, Visual
 " Diff* all use gray background.
-"
-" ---------------------
-" For 16 color terminal:
-"
-" You must change your TERM to linux-16color for this to work.
-"
-" For at least reverse(inverse) attributes, fg_color = fg_color % 8.
-" Which means you can't use reverse with brighter foreground to get brighter
-" background.
-"
-" linux-16color might use 21 to turn off bold, if that won't work, you should
-" recompile it to use 22 instead, see ncurse terminfo for detail.
-"
-" Screen-16color won't work by default, after replace it's setaf and setbf
-" with linux-16color, the bold attribute becomes unstable, have no ider why
-" would that happen.
 
 hi clear
 if exists('g:syntax_on')
@@ -216,7 +197,7 @@ call s:hi('TabLineSel', s:black, s:cyan)
 call s:hi('TabLineFill', s:gray, s:black)
 
 hi! link CursorColumn CursorLine
-call s:hi('CursorLine', 'fg', s:gray)
+call s:hi('CursorLine', 'none', s:gray)
 call s:hi('ColorColumn', 'fg', s:gray)
 
 hi! link QuickFixLine Search
